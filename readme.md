@@ -32,17 +32,14 @@ public class TvDTO {
 Explanation of annotations and fields:
 ```
 ```plaintext
-Copy code
 - @Data → Lombok annotation generating getters, setters, equals, hashCode, etc.
 - @ToString → automatically creates a toString() method.
 - @JsonIgnoreProperties(ignoreUnknown = true) → tells Jackson to ignore any JSON fields not declared in the class.
 - @JsonProperty("name") → maps the JSON "name" field to the Java "title" field.
 - @JsonProperty("vote_count") → maps the JSON "vote_count" field to the Java "rating" field.
-Example JSON → Java Mapping:
 ```
-```java
-json
-Copy code
+Example JSON → Java Mapping:
+```json
 {
   "id": 94605,
   "name": "Arcane",
@@ -50,7 +47,8 @@ Copy code
   "popularity": 17.8762,
   "vote_count": 5361
 }
-
+```
+```java
 TvDTO {
   id = 94605,
   title = "Arcane",
@@ -58,9 +56,10 @@ TvDTO {
   popularity = 17.8762,
   rating = 5361
 }
-2. StructureDTO
+```
+## 2. StructureDTO
 Represents the outer structure of the API response.
-
+```java
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StructureDTO {
@@ -71,13 +70,13 @@ public class StructureDTO {
 Explanation:
 
 ```plaintext
-Copy code
 - The TMDb API response contains several arrays: movie_results, person_results, tv_results, etc.
 - We only care about tv_results for this example.
 - @JsonProperty("tv_results") ensures Jackson maps the JSON array to the Java field tvDTOList.
 - After mapping, StructureDTO will hold a list of TvDTO objects.
+```
 Example JSON:
-
+```json
 {
   "movie_results": [],
   "person_results": [],
